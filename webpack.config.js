@@ -1,6 +1,8 @@
 const path = require('path'),
     HtmlWebpackPlugin = require('html-webpack-plugin'),
-    ExtractTextPlugin = require('extract-text-webpack-plugin')
+    ExtractTextPlugin = require('extract-text-webpack-plugin'),
+    UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
+    WEBPACK_MODE = process.env.npm_lifecycle_event
     ;
 
 const config = {
@@ -36,6 +38,10 @@ const config = {
         }),
         new ExtractTextPlugin('main.css')
     ]
+};
+
+if (WEBPACK_MODE === 'build') {
+    config.plugins = [...config.plugins, new UglifyJsPlugin()]
 }
 
 module.exports = config;
