@@ -1,33 +1,7 @@
 import '../css/style.css';
 
-import React from 'react';
-import ReactDOM from 'react-dom';
+import printValues from './sample1.js';
 
-let arr = ['a', 'b', 'c', 'd'];
+import './ticker';
 
-
-function printValues(a) {
-    ReactDOM.render(
-        getUnorderedList(arr),
-        document.querySelector('#arrvalues')
-    )
-}
-
-function getUnorderedList(ar) {
-    let i = 0;
-    return (
-        <ul>
-            {ar.map(a => {
-                i+=1;
-                return (
-                    <li key={i}>
-                        {a}
-                    </li>
-                );
-            })}
-        </ul>
-    );
-}
-
-
-printValues(arr);
+printValues(['a', 'b', 'c', 'd']);
