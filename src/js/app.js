@@ -11,3 +11,5 @@ import './clock.jsx';
 import './clock.jsx';
 
 import './forms.jsx';
+
+import './temp-calculator.jsx';
