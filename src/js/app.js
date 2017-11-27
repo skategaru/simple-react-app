@@ -1,7 +1,13 @@
 import '../css/style.css';
 
-import printValues from './sample1.js';
+import './sample1.jsx';
 
-import './ticker';
+import './ticker.jsx';
 
-printValues(['a', 'b', 'c', 'd']);
+import './sample-component.jsx';
+
+import './clock.jsx';
+
+import './clock.jsx';
+
+import './forms.jsx';

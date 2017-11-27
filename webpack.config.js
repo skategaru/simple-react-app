@@ -11,6 +11,7 @@ const config = {
         path: path.resolve(__dirname, 'public'),
         filename: '[name].js'
     },
+    devtool: (WEBPACK_MODE === 'build') ? false : 'source-map',
     module: {
         rules: [
             {
@@ -21,7 +22,7 @@ const config = {
                 })
             },
             {
-                test: /\.js$/,
+                test: /\.js[x]?$/,
                 exclude: /(node_modules)/,
                 use: 'babel-loader'
             }

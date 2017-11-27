@@ -26,4 +26,4 @@ function getUnorderedList(ar) {
     );
 }
 
-export default printValues;
+printValues(['a', 'b', 'c', 'd']);
