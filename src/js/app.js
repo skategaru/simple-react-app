@@ -13,3 +13,7 @@ import './clock.jsx';
 import './forms.jsx';
 
 import './temp-calculator.jsx';
+
+import './crux-view.jsx';
+
+import './todo.jsx';
