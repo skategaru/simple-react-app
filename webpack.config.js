@@ -7,7 +7,10 @@ const path = require('path'),
     ;
 
 const config = {
-    entry: path.resolve(__dirname, 'src', 'js', 'app.js'),
+    entry: {
+            app: path.resolve(__dirname, 'src', 'js', 'app.js'),
+            ur: path.resolve(__dirname, 'src', 'js', 'ur', 'index.jsx')
+        },
     output: {
         path: path.resolve(__dirname, 'public'),
         filename: '[name].js'
@@ -36,7 +39,13 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: path.resolve(__dirname, 'src', 'index.html')
+            template: path.resolve(__dirname, 'src', 'index.html'),
+            chunks: ['app']
+        }),
+        new HtmlWebpackPlugin({
+            template: path.resolve(__dirname, 'src', 'ur-test.html'),
+            filename: 'ur-test.html',
+            chunks: ['ur']
         }),
         new ExtractTextPlugin('main.css'),
         new CopyWebpackPlugin([{
