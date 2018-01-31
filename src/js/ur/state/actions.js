@@ -12,8 +12,22 @@ function update(value) {
     });
 }
 
+function undo() {
+    return ({
+        type: 'UNDO'
+    });
+}
 
-export default {
+
+function redo() {
+    return ({
+        type: 'REDO'
+    });
+}
+
+export {
     focus,
-    update
+    update,
+    undo,
+    redo
 }

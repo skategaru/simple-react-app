@@ -1,13 +1,17 @@
-import { applyMiddleware, createStore } from 'redux';
+import { applyMiddleware, createStore, combineReducers } from 'redux';
 import { createLogger } from 'redux-logger';
 import updateField from './reducers';
+
+import createTeeMiddlware from './tee-middleware';
 
 const logger = createLogger({
     collapsed: false
 });
 
+const tee = createTeeMiddlware({limit: 20000});
+
 const store = {
-    fname: '',
+    fname: 'Muqsith',
     lname: '',
     email: '',
     phone: '',
@@ -16,4 +20,8 @@ const store = {
     currentField: 'email'
 };
 
-export default createStore(updateField, store, applyMiddleware(logger));
+export default createStore(
+        updateField,
+        store,
+        applyMiddleware(logger, tee)
+    );

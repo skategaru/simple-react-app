@@ -10,6 +10,16 @@ function updateField(state = {}, action) {
                 return state;
             }
         }
+        case 'UNDO': {
+            let _s = window._stck.undo();
+            if (_s) return _s;
+            else return state;
+        }
+        case 'REDO': {
+            let _s = window._stck.redo();
+            if (_s) return _s;
+            else return state;
+        }
         default:
             return state;
     }

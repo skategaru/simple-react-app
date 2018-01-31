@@ -2,7 +2,7 @@ import React from 'react';
 
 import { connect } from 'react-redux';
 
-import actions from './state/actions';
+import { focus, update, undo, redo } from './state/actions';
 
 class _App extends React.Component {
     constructor(props) {
@@ -24,6 +24,14 @@ class _App extends React.Component {
         );
     }
 
+    componentDidMount() {
+        this.setState(this.props);
+    }
+
+    componentWillReceiveProps(nextProps) {
+        this.setState(nextProps);
+    }
+
     render() {
         return (
             <div className="container">
@@ -32,10 +40,10 @@ class _App extends React.Component {
                 </div>
                 <div className="row">
                     <div className="col-md-6">
-                        <button className="float-left">U</button>
+                        <button className="float-left" onClick={ (e) => { this.props.handleUndo(); } }>Undo</button>
                     </div>
                     <div className="col-md-6">
-                        <button className="float-right">R</button>
+                        <button className="float-right" onClick={ (e) => { this.props.handleRedo(); } }>Redo</button>
                     </div>
                 </div>
                 <div className="row">
@@ -132,10 +140,16 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
     return ({
         handleOnFocus: function(fieldName) {
-            dispatch(actions.focus(fieldName));
+            dispatch(focus(fieldName));
         },
         handleUpdate: function(value) {
-            dispatch(actions.update(value));
+            dispatch(update(value));
+        },
+        handleUndo: function() {
+            dispatch(undo());
+        },
+        handleRedo: function() {
+            dispatch(redo());
         }
     })
 }
