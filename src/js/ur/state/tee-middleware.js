@@ -6,15 +6,15 @@ function createTeeMiddlware(options) {
             arr: [],
             index: 0,
             push: function(element) {
+                if (this.index < (this.arr.length-1)) {
+                    this.arr = this.arr.slice(0, this.index);
+                }
                 if (this.arr.length >= this.limit) {
                     this.arr.shift();
                     --this.index;
                 }
-                if (this.index < this.limit) {
-                    this.arr = this.arr.slice(0, this.index);
-                }
                 this.arr.push(element);
-                ++this.index;
+                this.index++;
             },
             undo: function() {
                 if (this.index >= 0) {
