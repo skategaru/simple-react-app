@@ -9,3 +9,10 @@ body {
     text-decoration: line-through;
 }
 
+.titleRed {
+    color: red;
+}
+
+.titleGreen {
+    color: green;
+}
