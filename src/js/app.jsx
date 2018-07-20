@@ -1,12 +1,11 @@
 import React from 'react';
 import styles from './../css/style.css';
+import List from './list.jsx';
 
 class EmpForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state={};
-        this.state.contact = { firstname: "", lastname:"" };
-        this.data = [];
+        this.state= { data: [], contact: { firstname: "", lastname:"" } };
     }
 
     handleChange(item, evt) {
@@ -18,14 +17,13 @@ class EmpForm extends React.Component {
     submitForm(evt) {
         evt.preventDefault();
         const currentContact = JSON.parse(JSON.stringify(this.state.contact));
-        this.data.push(currentContact);
-        this.state.contact = { firstname: "", lastname:"" };
-        this.forceUpdate();
+        this.setState({data: [...this.state.data, currentContact]});
+        this.setState({contact: { firstname: "", lastname:"" }});
     }
 
     render() {
         return (
-            <div className={styles.formContainer}>
+            <div className={styles['form-container']}>
                 <form onSubmit={this.submitForm.bind(this)}>
                     <label>First Name</label><br />
                     <input type="text" id="firstname" name="firstname" value={this.state.contact.firstname} onChange={this.handleChange.bind(this, 'firstname')} />
@@ -37,20 +35,8 @@ class EmpForm extends React.Component {
                     <input type="submit" />
                 </form>
 
-                <table>
-                    <tbody>
-                        <tr>
-                            <th>First Name</th>
-                            <th>Last Name</th>
-                        </tr>
-                        {this.data.map(i=>
-                            <tr>
-                                <td>{i.firstname}</td>
-                                <td>{i.lastname}</td>
-                            </tr>
-                        )}
-                    </tbody>
-                </table>
+                <List data={this.state.data}/>
+                
             </div>
         );
     }
