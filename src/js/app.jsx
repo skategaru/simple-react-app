@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './../css/style.css';
+import styles from './../css/style.scss';
 import Form from './form.jsx';
 import List from './list.jsx';
 
@@ -64,7 +64,7 @@ class EmpForm extends React.Component {
 */
 export default (props) => {
     return (
-        <div className={styles['form-container']}>
+        <div className={styles['container']}>
             <Form />
             <List />
         </div>
