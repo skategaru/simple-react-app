@@ -1,32 +1,39 @@
 import React from 'react';
-import styles from './../css/style.css';
+import styles from './../css/style.scss';
 import Form from './form.jsx';
 import List from './list.jsx';
 
 class EmpForm extends React.Component {
     constructor(props) {
         super(props);
-        this.state= { data: [], contact: { firstname: "", lastname:"" } };
+        this.state= { status: 'active', data: [], contact: { firstName: "", lastName:"" } };
     }
 
     handleChange(item, evt) {
         var contact = this.state.contact;
         contact[item] = evt.target.value;
         this.setState({contact:contact});
+        if (!this.state.contact.firstName && !this.state.contact.lastName) {
+            this.setState({status: 'active'});
+        } else {
+            this.setState({status: 'locked'});
+        }
+
     }
 
     submitForm(evt) {
         evt.preventDefault();
         const currentContact = JSON.parse(JSON.stringify(this.state.contact));
         this.setState({data: [...this.state.data, currentContact]});
-        this.setState({contact: { firstname: "", lastname:"" }});
+        this.setState({contact: { firstName: "", lastName:"" }});
+        this.setState({status: 'active'});
     }
 
     render() {
         return (
-            <div className={styles['form-container']}>
+            <div className={styles['container']}>
                 <Form data={this} />
-                <List data={this.state.data}/>
+                <List data={{data: this.state.data, status : this.state.status}}/>
             </div>
         );
     }

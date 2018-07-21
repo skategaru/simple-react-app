@@ -18,16 +18,23 @@ const config = {
     module: {
         rules: [
             {
-                test: /\.css$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: "style-loader",
-                    use: ['css-loader?modules=true', 'postcss-loader']
-                })
-            },
-            {
                 test: /\.js[x]?$/,
                 exclude: /(node_modules)/,
                 use: 'babel-loader'
+            },
+            {
+                test: /\.scss$/,
+                exclude: /(node_modules)/,
+                use: ExtractTextPlugin.extract({
+                    fallback: "style-loader",
+                    use: ['css-loader?modules=true&url=false&localIdentName: \'[local]--[hash:base64:5]\'', 
+                    'postcss-loader', {
+                        loader: 'less-loader',
+                        options: {
+                            data: "$env: " + WEBPACK_MODE + ";"
+                        }
+                    }]
+                })
             }
         ]
     },
