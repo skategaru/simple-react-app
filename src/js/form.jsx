@@ -1,16 +1,62 @@
 import React from 'react';
 
-export default (props) => {
-    return (
-        <form onSubmit={props.data.submitForm.bind(props.data)}>
-            <label>First Name</label><br />
-            <input type="text" id="firstname" name="firsstname" value={props.data.state.contact.firstname} onChange={props.data.handleChange.bind(props.data, 'firstname')} />
-            <br />
-            <label>Last Name</label>
-            <br />
-            <input type="text" id="lastname" name="lastname" value={props.data.state.contact.lastname} onChange={props.data.handleChange.bind(props.data, 'lastname')} />
-            <br /><br />
-            <input type="submit" />
-        </form>
-    )
+import { connect } from 'react-redux';
+import { addContact } from './redux/actions';
+
+class FormComponent extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {firstName: "", lastName: ""};
+        this.handleChange = this.handleChange.bind(this);
+        this.submitForm = this.submitForm.bind(this);
+    }
+
+    handleChange(evt) {
+        const target = evt.currentTarget;
+        this.setState({[target.name]: target.value});
+    }
+
+    submitForm(evt) {
+        evt.preventDefault();
+        this.props.addContact({...this.state});
+        this.setState({ firstName: "", lastName:"" });
+    }
+
+    render() {
+        return (
+            <form onSubmit={this.submitForm}>
+                <label>First Name</label><br />
+                <input type="text"
+                    name="firstName" 
+                    value={this.state.firstName} 
+                    onChange={this.handleChange} />
+                <br />
+                <label>Last Name</label>
+                <br />
+                <input type="text"
+                    name="lastName" 
+                    value={this.state.lastName} 
+                    onChange={this.handleChange} />
+                <br /><br />
+                <input type="submit" />
+            </form>
+        )
+    }
 }
+
+const mapStateToProps = (state) => {
+    return state;
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return ({
+        addContact: (contact) => { dispatch(addContact(contact)); }
+    });
+};
+
+const Form = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(FormComponent);
+
+export default Form;
