@@ -1,5 +1,6 @@
 import React from 'react';
 import styles from './../css/style.css';
+import Form from './form.jsx';
 import List from './list.jsx';
 
 class EmpForm extends React.Component {
@@ -24,19 +25,8 @@ class EmpForm extends React.Component {
     render() {
         return (
             <div className={styles['form-container']}>
-                <form onSubmit={this.submitForm.bind(this)}>
-                    <label>First Name</label><br />
-                    <input type="text" id="firstname" name="firstname" value={this.state.contact.firstname} onChange={this.handleChange.bind(this, 'firstname')} />
-                    <br />
-                    <label>Last Name</label>
-                    <br />
-                    <input type="text" id="lastname" name="lastname" value={this.state.contact.lastname} onChange={this.handleChange.bind(this, 'lastname')} />
-                    <br /><br />
-                    <input type="submit" />
-                </form>
-
+                <Form data={this} />
                 <List data={this.state.data}/>
-                
             </div>
         );
     }
