@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { addContact, setStatus } from './redux/actions';
+import { addContact, setStatus, fetchContacts } from './redux/actions';
 
 import styles from './../css/style.scss';
 
@@ -24,6 +24,10 @@ class FormComponent extends React.Component {
         this.props.addContact({ ...this.state });
         this.setState({ firstName: "", lastName: "" });
         this.props.setStatus('active');
+    }
+
+    componentDidMount() {
+        this.props.fetchContacts();
     }
 
     render() {
@@ -57,7 +61,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return ({
         addContact: (contact) => { dispatch(addContact(contact)); },
-        setStatus: (status) => { dispatch(setStatus(status));}
+        setStatus: (status) => { dispatch(setStatus(status));},
+        fetchContacts: () => { dispatch(fetchContacts());}
     });
 };
 

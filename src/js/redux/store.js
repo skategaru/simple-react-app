@@ -16,7 +16,8 @@
 import logger from 'redux-logger'
 import { createStore, applyMiddleware } from 'redux';
 import contactFormApp from './reducer';
+import ReduxThunk from 'redux-thunk';
 
-const store = createStore(contactFormApp, applyMiddleware(logger));
+const store = createStore(contactFormApp, applyMiddleware(logger, ReduxThunk));
 
 export default store;

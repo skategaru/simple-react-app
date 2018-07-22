@@ -1,4 +1,4 @@
-import { ADD_CONTACT, SET_STATUS } from './types';
+import { ADD_CONTACT, SET_STATUS, RECEIVE_CONTACTS } from './types';
 
 
 const initialState =  {
@@ -18,6 +18,12 @@ export default (state = initialState, action) => {
             return ({
                 ...state,
                 status: action.status
+            });
+        }
+        case RECEIVE_CONTACTS: {
+            return ({
+                ...state,
+                data: [...state.data, ...action.contacts] 
             });
         }
         default: {

@@ -3,8 +3,15 @@ const path = require('path'),
     ExtractTextPlugin = require('extract-text-webpack-plugin'),
     UglifyJsPlugin = require('uglifyjs-webpack-plugin'),
     CopyWebpackPlugin = require('copy-webpack-plugin'),
-    WEBPACK_MODE = process.env.npm_lifecycle_event
-    ;
+    WEBPACK_MODE = process.env.npm_lifecycle_event;
+
+let apiData = [
+    {firstName:"1-adlkfjdf", lastName: "dlkfjdf"},
+    {firstName:"2-adlkfjdf", lastName: "dlkfjdf"},
+    {firstName:"3-adlkfjdf", lastName: "dlkfjdf"},
+    {firstName:"4-adlkfjdf", lastName: "dlkfjdf"},
+    {firstName:"5-adlkfjdf", lastName: "dlkfjdf"}
+];
 
 const config = {
     entry: {
@@ -41,7 +48,17 @@ const config = {
     devServer: {
         contentBase: path.join(__dirname, "public"),
         compress: true,
-        port: 8888
+        port: 8888,
+        setup: function(app) {
+            app
+            .get('/api', function(req, res) {
+                res.json(apiData);
+            })
+            .post('/api', function(req, res) {
+                // add to api data
+            })
+            ;
+        }
     },
     plugins: [
         new HtmlWebpackPlugin({
