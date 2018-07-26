@@ -27,6 +27,7 @@ class FormComponent extends React.Component {
     }
 
     componentDidMount() {
+        // data populated with GET
         this.props.fetchContacts();
     }
 

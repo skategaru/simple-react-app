@@ -6,11 +6,11 @@ const path = require('path'),
     WEBPACK_MODE = process.env.npm_lifecycle_event;
 
 let apiData = [
-    {firstName:"1-adlkfjdf", lastName: "dlkfjdf"},
-    {firstName:"2-adlkfjdf", lastName: "dlkfjdf"},
-    {firstName:"3-adlkfjdf", lastName: "dlkfjdf"},
-    {firstName:"4-adlkfjdf", lastName: "dlkfjdf"},
-    {firstName:"5-adlkfjdf", lastName: "dlkfjdf"}
+    {firstName:"1-Populated", lastName: "Predata"},
+    {firstName:"2-Populated", lastName: "Predata"},
+    {firstName:"3-Populated", lastName: "Predata"},
+    {firstName:"4-Populated", lastName: "Predata"},
+    {firstName:"5-Populated", lastName: "Predata"}
 ];
 
 const config = {
@@ -55,7 +55,7 @@ const config = {
                 res.json(apiData);
             })
             .post('/api', function(req, res) {
-                // add to api data
+                req.json();
             })
             ;
         }
